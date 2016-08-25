@@ -39,7 +39,7 @@
 
 ### 完整性和数字签名
 
-$Z$表示压缩，$Z^{-1}$表示解压。$H$表示哈希（比如使用SHA1），$\Vert$表示连接两段信息。
+<img src="http://latex.codecogs.com/gif.latex?Z" /> 表示压缩，<img src="http://latex.codecogs.com/gif.latex?Z^{-1}" /> 表示解压。<img src="http://latex.codecogs.com/gif.latex?H" /> 表示哈希（比如使用SHA1），<img src="http://latex.codecogs.com/gif.latex?\Vert" /> 表示连接两段信息。
 
 ![0](https://raw.githubusercontent.com/familyld/Network_Security/master/graph/PGP1.png)
 

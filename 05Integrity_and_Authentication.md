@@ -60,17 +60,17 @@
 
 - B收到以后就可以用A的公钥进行解密，只要解出来A就**无法否认自己发送过这个消息**（因为A的私钥只有A自己有）
 
-$$Alice \rightarrow m \parallel D_{k_{dA}}[h(m)] \rightarrow Bob$$
+<img src="http://latex.codecogs.com/gif.latex?Alice \rightarrow m \parallel D_{k_{dA}}[h(m)] \rightarrow Bob" />
 
 - 为了保证安全性，有可能经过一层加密才发送
 
-$$Alice \rightarrow E_k(m \parallel D_{k_{dA}}[h(m)]) \rightarrow Bob$$
+<img src="http://latex.codecogs.com/gif.latex?Alice \rightarrow E_k(m \parallel D_{k_{dA}}[h(m)]) \rightarrow Bob" />
 
-**注意，这里的$\parallel$符号表示两边的内容连在一起（合并为一个整体）**
+**注意，这里的<img src="http://latex.codecogs.com/gif.latex?\parallel" /> 符号表示两边的内容连在一起（合并为一个整体）**
 
 ### 构造哈希值的方法
 
-给定块加密（$M$,$C$,$K$,$E_k$,$D_k$），块大小为n bits，加密算法$E_k$把n bits的块映射为另一个n bits的块，每一个key的长度为l bit。
+给定块加密（<img src="http://latex.codecogs.com/gif.latex?M" /> ,<img src="http://latex.codecogs.com/gif.latex?C" /> ,<img src="http://latex.codecogs.com/gif.latex?K" /> ,<img src="http://latex.codecogs.com/gif.latex?E_k" /> ,<img src="http://latex.codecogs.com/gif.latex?D_k" /> ），块大小为n bits，加密算法<img src="http://latex.codecogs.com/gif.latex?E_k" /> 把n bits的块映射为另一个n bits的块，每一个key的长度为l bit。
 
 ![0](https://raw.githubusercontent.com/familyld/Network_Security/master/graph/construct_hash_value1.png)
 
@@ -96,7 +96,7 @@ $$Alice \rightarrow E_k(m \parallel D_{k_{dA}}[h(m)]) \rightarrow Bob$$
 
 - 和哈希函数的使用方法类似。首先算出一个hash值和原文一起发送，接收方收到以后再算一个新的hash值和原来那个进行比对。匹配成功就说明验证成功，否则验证失败
 
-- 在这种情况下因为哈希函数是带秘钥的，因此并不像普通的哈希函数一样进行原文和哈希同时替换那样容易。在带秘钥的哈希函数中，哈希值只能靠猜，因此对于一个n bits的哈希函数来说，任意两对文本哈希值相同的概率仅为$\frac{1}{2^n}$
+- 在这种情况下因为哈希函数是带秘钥的，因此并不像普通的哈希函数一样进行原文和哈希同时替换那样容易。在带秘钥的哈希函数中，哈希值只能靠猜，因此对于一个n bits的哈希函数来说，任意两对文本哈希值相同的概率仅为<img src="http://latex.codecogs.com/gif.latex?\frac{1}{2^n}" />
 
 - 但不管怎么说这种情况还是不保证机密性（因为原文并没有加密…），因此**如需保证机密性还需要对原文进行加密**
 
@@ -121,12 +121,12 @@ HMAC就是一种密钥相关的哈希函数。
 - h 是哈希函数, 哈希值长度为n bits。
 - b 是一个选定的正整数且b整除8。
 - K 是密钥，长度最多为b bits。
-- $\overline K$ 是K左边补满0，使得长度为b bits。
+- <img src="http://latex.codecogs.com/gif.latex?\overline K" />  是K左边补满0，使得长度为b bits。
 - 输入填充ipad和输出填充opad
     - ipad = 00110110 重复 b/8 次（使得长度为b bits）。
     - opad = 01011100 重复 b/8 次（使得长度为b bits）。
 
-$$HMAC_K(m) = h[(\overline K \oplus opad) \parallel h[(\overline K \oplus ipad) \parallel m]]$$
+<img src="http://latex.codecogs.com/gif.latex?HMAC_K(m) = h[(\overline K \oplus opad) \parallel h[(\overline K \oplus ipad) \parallel m]]" />
 
 ![4](https://raw.githubusercontent.com/familyld/Network_Security/master/graph/HMAC.png)
 
@@ -167,16 +167,16 @@ $$HMAC_K(m) = h[(\overline K \oplus opad) \parallel h[(\overline K \oplus ipad) 
 
 - 这样的发送方式是否能满足数字签名的要求？
 
-$$Alice \rightarrow E_{k2}[m \parallel h_{k1}(m)] \rightarrow Bob$$
+<img src="http://latex.codecogs.com/gif.latex?Alice \rightarrow E_{k2}[m \parallel h_{k1}(m)] \rightarrow Bob" />
 
 - 答案是不能
     - 这种发送方式中k1和k2确实只有Alice和Bob知道，确实可以保证一定程度上的机密性（confidentiality）和完整性（ integrity ），也就是说Bob可以验证发送方的身份（也就是可以验证这条消息是不是Alice发出来的）
 
-    - 但是Alice是可以否认自己发送过的消息的，因为存在Bob伪造消息的可能（因为Bob是知道$h_{k1}$的…）
+    - 但是Alice是可以否认自己发送过的消息的，因为存在Bob伪造消息的可能（因为Bob是知道<img src="http://latex.codecogs.com/gif.latex?h_{k1}" /> 的…）
 
     - 这也就是为什么数字签名必须使用Alice的私钥加密
 
-$$Alice \rightarrow E_{k}(m \parallel D_{k_{dA}}[h(m)]) \rightarrow Bob$$
+<img src="http://latex.codecogs.com/gif.latex?Alice \rightarrow E_{k}(m \parallel D_{k_{dA}}[h(m)]) \rightarrow Bob" />
 
 ### 数字签名方法
 

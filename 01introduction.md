@@ -90,20 +90,20 @@ Confidentiality, Integrity, and Availability, 记忆为CIA。
 
 假设A和C是两个明文字符，B和D是对应的密文字符，K是该位置的密码字符，则有：
 
-$$(A \oplus K) = B$$
-$$(C \oplus K) = D$$
+<img src="http://latex.codecogs.com/gif.latex?(A \oplus K) = B" />
+<img src="http://latex.codecogs.com/gif.latex?(C \oplus K) = D" />
 
 把这两条式子用异或连起来：
 
-$$(A \oplus K) \oplus (C \oplus K) = B \oplus D$$
+<img src="http://latex.codecogs.com/gif.latex?(A \oplus K) \oplus (C \oplus K) = B \oplus D" />
 
 由于异或的顺序是不影响结果的，所以左边又可以把两个K放在一起，从而由于**异或本身等于全0**，**异或全0等于本身**，所以消去了两个K：
 
-$$(A \oplus K) \oplus (C \oplus K) = A \oplus C$$
+<img src="http://latex.codecogs.com/gif.latex?(A \oplus K) \oplus (C \oplus K) = A \oplus C" />
 
 于是就有了密文相异或等于明文相异或：
 
-$$B \oplus D = A \oplus C$$
+<img src="http://latex.codecogs.com/gif.latex?B \oplus D = A \oplus C" />
 
 又因为！**大写字母异或空格得到对应的小写字母**，**小写字母异或空格得到对应的大写字母**。总之就是**字母与空格异或还是字母**。
 
@@ -111,7 +111,7 @@ $$B \oplus D = A \oplus C$$
 
 又因为！
 
-$$A \oplus K = B， 则有 A \oplus B = K$$
+<img src="http://latex.codecogs.com/gif.latex?A \oplus K = B， 则有 A \oplus B = K" />
 
 所以说**如果我们有把握明文字符是空格**，就可以直接**通过明文和密文异或得到这一位置的密码字符**！！
 
@@ -121,10 +121,10 @@ $$A \oplus K = B， 则有 A \oplus B = K$$
 
 因为，我们还有：
 
-$$(A \oplus K) \oplus K = A$$
+<img src="http://latex.codecogs.com/gif.latex?(A \oplus K) \oplus K = A" />
 
 或者说：
 
-$$A \oplus K = B， 则有 B \oplus K = A$$
+<img src="http://latex.codecogs.com/gif.latex?A \oplus K = B， 则有 B \oplus K = A" />
 
 异或就是这么一个磨人的小妖精~~

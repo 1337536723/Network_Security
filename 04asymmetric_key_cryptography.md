@@ -36,9 +36,9 @@
 
 #### 欧拉函数
 
-欧拉函数$\varphi (n)$求的是**小于n且与n互质的正整数的个数**。这些数
+欧拉函数<img src="http://latex.codecogs.com/gif.latex?\varphi (n)" /> 求的是**小于n且与n互质的正整数的个数**。这些数
 
-比方说$\varphi (6)$等于2，因为只有1和5符合与6互质的条件。
+比方说<img src="http://latex.codecogs.com/gif.latex?\varphi (6)" /> 等于2，因为只有1和5符合与6互质的条件。
 
 对于**非素数**而言，欧拉函数的值就是排除因子后，剩余小于自身的素数的个数加1（因为数字1与所有数互质）。
 
@@ -55,15 +55,15 @@
 ---
 ##### 推论1
 
-$$a^{p} \mod p = a$$
+<img src="http://latex.codecogs.com/gif.latex?a^{p} \mod p = a" />
 
 **证明**
 
-$\ \ \ \ a^p \mod p$<br>
-$ = (a^{p-1} \times a) \mod p$<br>
-$ = [(a^{p-1} \mod p) \times (a \mod p)] \mod p$<br>
-$ = [1 \times a] \mod p$<br>
-$ = a$
+<img src="http://latex.codecogs.com/gif.latex?\ \ \ \ a^p \mod p" /> <br>
+<img src="http://latex.codecogs.com/gif.latex? = (a^{p-1} \times a) \mod p" /> <br>
+<img src="http://latex.codecogs.com/gif.latex? = [(a^{p-1} \mod p) \times (a \mod p)] \mod p" /> <br>
+<img src="http://latex.codecogs.com/gif.latex? = [1 \times a] \mod p" /> <br>
+<img src="http://latex.codecogs.com/gif.latex? = a" />
 
 **注**：因为a小于p，所以a模p等于a。
 
@@ -72,21 +72,21 @@ $ = a$
 ---
 ##### 推论2
 
-$$a^{-1} \mod p = a^{p-2} \mod p$$
+<img src="http://latex.codecogs.com/gif.latex?a^{-1} \mod p = a^{p-2} \mod p" />
 
 **证明**
 
-$\ \ \ \ a^{p-2} \mod p$<br>
-$ = (a^{p-1} \times a^{-1}) \mod p$<br>
-$ = [(a^{p-1} \mod p) \times (a^{-1} \mod p)] \mod p$<br>
-$ = [1 \times a^{-1}] \mod p$<br>
-$ = a^{-1} \mod p$
+<img src="http://latex.codecogs.com/gif.latex?\ \ \ \ a^{p-2} \mod p" /> <br>
+<img src="http://latex.codecogs.com/gif.latex? = (a^{p-1} \times a^{-1}) \mod p" /> <br>
+<img src="http://latex.codecogs.com/gif.latex? = [(a^{p-1} \mod p) \times (a^{-1} \mod p)] \mod p" /> <br>
+<img src="http://latex.codecogs.com/gif.latex? = [1 \times a^{-1}] \mod p" /> <br>
+<img src="http://latex.codecogs.com/gif.latex? = a^{-1} \mod p" />
 
 ---
 
 #####应用：快速生成大素数
 1. 选择一个随机整数
-2. 检测 $2^{p-1} \mod p$ 是否等于1，是则成功。
+2. 检测 <img src="http://latex.codecogs.com/gif.latex?2^{p-1} \mod p" />  是否等于1，是则成功。
 
 #### 欧拉定理
 
@@ -105,15 +105,15 @@ $ = a^{-1} \mod p$
 ![4](https://raw.githubusercontent.com/familyld/Network_Security/master/graph/RSA1.png)
 
 关键在于如果p，q特别大，n很难被因式分解，
-从而很难还原出$\varphi (n)$，也就很难推出d
+从而很难还原出<img src="http://latex.codecogs.com/gif.latex?\varphi (n)" /> ，也就很难推出d
 
-- 因此**p,q, $\varphi (n)$不可公开**
+- 因此**p,q, <img src="http://latex.codecogs.com/gif.latex?\varphi (n)" /> 不可公开**
 - 但是p,q太大时，计算难度也会增大
 
 ### 注意
 
-1. e的选取虽是**随机**，但要求满足$1 \leq e \leq \varphi (n)$，并且**e要与$\varphi (n)$这个数值互质**。
-2. 计算d时，$e^{-1}$是指**e模$\varphi (n)$的乘法逆元**，而不是倒数！
+1. e的选取虽是**随机**，但要求满足<img src="http://latex.codecogs.com/gif.latex?1 \leq e \leq \varphi (n)" /> ，并且**e要与<img src="http://latex.codecogs.com/gif.latex?\varphi (n)" /> 这个数值互质**。
+2. 计算d时，<img src="http://latex.codecogs.com/gif.latex?e^{-1}" /> 是指**e模<img src="http://latex.codecogs.com/gif.latex?\varphi (n)" /> 的乘法逆元**，而不是倒数！
 
 ### 加解密方法
 
@@ -125,7 +125,7 @@ $ = a^{-1} \mod p$
 
 ### 注意
 
-加密时，密文等于原文的e次幂**模大数n**，千万记住了！！**不是**模$\varphi (n)$。
+加密时，密文等于原文的e次幂**模大数n**，千万记住了！！**不是**模<img src="http://latex.codecogs.com/gif.latex?\varphi (n)" /> 。
 
 解密时，原文等于密文的d次幂**模大数n**。
 
@@ -137,9 +137,9 @@ $ = a^{-1} \mod p$
 
 #### 分析
 
-n=55可以分解为质数p=5和q=11，$\varphi (n) = (p-1)(q-1) = 4 \times 10 = 40$
+n=55可以分解为质数p=5和q=11，<img src="http://latex.codecogs.com/gif.latex?\varphi (n) = (p-1)(q-1) = 4 \times 10 = 40" />
 
-计算私钥d要首先计算出e模$\varphi (n)$的乘法逆元：
+计算私钥d要首先计算出e模<img src="http://latex.codecogs.com/gif.latex?\varphi (n)" /> 的乘法逆元：
 
 | 序号 | a | b | 商 | 余数 | x | y |
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|
@@ -149,7 +149,7 @@ n=55可以分解为质数p=5和q=11，$\varphi (n) = (p-1)(q-1) = 4 \times 10 = 40$
 
 使用扩展欧几里德定理，经过3轮辗转相除之后，可以得到乘法逆元为-17。
 
-由此，计算出$d = (-17) \mod 40 = 23$。
+由此，计算出<img src="http://latex.codecogs.com/gif.latex?d = (-17) \mod 40 = 23" /> 。
 
 然后就可以基于Square and Multiply方法来进行指数的快速求模来获取密文了~
 
@@ -163,50 +163,50 @@ n=55可以分解为质数p=5和q=11，$\varphi (n) = (p-1)(q-1) = 4 \times 10 = 40$
 
 题目给出很重要的信息是**两个公钥互质**，然后又提示了可以从**扩展欧几里德定理**着手。
 
-而我们能利用的信息包括：两个公钥$e_A$和$e_B$以及大数n，还有两份密文$c_A$和$c_B$。
+而我们能利用的信息包括：两个公钥<img src="http://latex.codecogs.com/gif.latex?e_A" /> 和<img src="http://latex.codecogs.com/gif.latex?e_B" /> 以及大数n，还有两份密文<img src="http://latex.codecogs.com/gif.latex?c_A" /> 和<img src="http://latex.codecogs.com/gif.latex?c_B" /> 。
 
 所以怎么用呢？ 首先，**互质的两数的最大公约数为1**。
 
-写成Bezout等式，则有：$p \times e_A + q \times e_B = 1$
+写成Bezout等式，则有：<img src="http://latex.codecogs.com/gif.latex?p \times e_A + q \times e_B = 1" />
 
 利用扩展欧几里德定理我们可以求出公钥的**乘法逆元**p和q！
 
-然后分析一下，怎么**把原文m表达为$c_A$和$c_B$的关系式**呢？
+然后分析一下，怎么**把原文m表达为<img src="http://latex.codecogs.com/gif.latex?c_A" /> 和<img src="http://latex.codecogs.com/gif.latex?c_B" /> 的关系式**呢？
 
-$\ \ \ \ m \mod n$<br>
-$ = m^1 \mod n$<br>
-$ = m^{p \times e_A + q \times e_B} \mod n$<br>
-$ = (m^{p \times e_A} \times m^{q \times e_B}) \mod n$<br>
-$ = (c_A^{p} \times c_B^{q}) \mod n$
+<img src="http://latex.codecogs.com/gif.latex?\ \ \ \ m \mod n" /> <br>
+<img src="http://latex.codecogs.com/gif.latex? = m^1 \mod n" /> <br>
+<img src="http://latex.codecogs.com/gif.latex? = m^{p \times e_A + q \times e_B} \mod n" /> <br>
+<img src="http://latex.codecogs.com/gif.latex? = (m^{p \times e_A} \times m^{q \times e_B}) \mod n" /> <br>
+<img src="http://latex.codecogs.com/gif.latex? = (c_A^{p} \times c_B^{q}) \mod n" />
 
 所以归纳以下，破解原文的过程就是：
 
 1. 用扩展欧几里德定理求出公钥的乘法逆元
-2. 用上面的等式计算出$m \mod n$
+2. 用上面的等式计算出<img src="http://latex.codecogs.com/gif.latex?m \mod n" />
 3. 得到原文m
-    - m实际上就等于$m \mod n$，因为m就是模n得到的，所以m肯定比n小
+    - m实际上就等于<img src="http://latex.codecogs.com/gif.latex?m \mod n" /> ，因为m就是模n得到的，所以m肯定比n小
 
 ## ElGamal加密系统（ElGamal Public-Key Cryptosystem）
 
 参见第2章密钥管理的本原根部分。
 
-对于一个质数p来说，当一个整数$\alpha$称为p的本原根时，其通过下式生成的a**各不相同**
+对于一个质数p来说，当一个整数<img src="http://latex.codecogs.com/gif.latex?\alpha" /> 称为p的本原根时，其通过下式生成的a**各不相同**
 
-$$a = \alpha^i mod \ p, \ where \ 0 \leq i \leq p-2$$
+<img src="http://latex.codecogs.com/gif.latex?a = \alpha^i mod \ p, \ where \ 0 \leq i \leq p-2" />
 
-**注意区分$a$和阿尔法$\alpha$**，前者是模运算的结果，后者是质数p的本原根。
+**注意区分<img src="http://latex.codecogs.com/gif.latex?a" /> 和阿尔法<img src="http://latex.codecogs.com/gif.latex?\alpha" /> **，前者是模运算的结果，后者是质数p的本原根。
 
 比方说2就是11的本原根：
 
 ![10](https://raw.githubusercontent.com/familyld/Network_Security/master/graph/primitive_root.png)
 
-可以看到$2^0$到$2^{11-2}$模11所得的结果皆不相同。
+可以看到<img src="http://latex.codecogs.com/gif.latex?2^0" /> 到<img src="http://latex.codecogs.com/gif.latex?2^{11-2}" /> 模11所得的结果皆不相同。
 
 **任意一个质数都有本原根**
 
-本原根的好处就在于，即使给出a，$\alpha$和p，**要求出i依然很难**。
+本原根的好处就在于，即使给出a，<img src="http://latex.codecogs.com/gif.latex?\alpha" /> 和p，**要求出i依然很难**。
 
-因此，**在ElGamal系统中，就算把公钥a，$\alpha$和p公开，也很难解出私钥i**。
+因此，**在ElGamal系统中，就算把公钥a，<img src="http://latex.codecogs.com/gif.latex?\alpha" /> 和p公开，也很难解出私钥i**。
 
 ![8](https://raw.githubusercontent.com/familyld/Network_Security/master/graph/ElGamal.png)
 
@@ -215,28 +215,28 @@ $$a = \alpha^i mod \ p, \ where \ 0 \leq i \leq p-2$$
 1. 首先选出一个大素数p
 2. 然后从1到p-2中选出一个素数d作为私钥
 3. 获取p的本原根e1。
-4. 计算$e_2 = e_1^d \mod p$
-5. 得到公钥 = ｛$e_1$，$e_2$，p｝，私钥 = d
+4. 计算<img src="http://latex.codecogs.com/gif.latex?e_2 = e_1^d \mod p" />
+5. 得到公钥 = ｛<img src="http://latex.codecogs.com/gif.latex?e_1" /> ，<img src="http://latex.codecogs.com/gif.latex?e_2" /> ，p｝，私钥 = d
 
 ### 加密
 
 1. 从1到p-2的素数中选择一个随机数r。
-2. 计算$C_1 = e_1^r \mod p$
-3. 计算$C_2 = (P \times e_2^r) \mod p$，注意P是原文
-4. 将$C_1$，$C_2$同时作为密文发送
+2. 计算<img src="http://latex.codecogs.com/gif.latex?C_1 = e_1^r \mod p" />
+3. 计算<img src="http://latex.codecogs.com/gif.latex?C_2 = (P \times e_2^r) \mod p" /> ，注意P是原文
+4. 将<img src="http://latex.codecogs.com/gif.latex?C_1" /> ，<img src="http://latex.codecogs.com/gif.latex?C_2" /> 同时作为密文发送
 
 ### 解密
 
-1. 计算$P = [C_2 \times (C_1^d)^{-1}] \mod p$
+1. 计算<img src="http://latex.codecogs.com/gif.latex?P = [C_2 \times (C_1^d)^{-1}] \mod p" />
 
 
 证明：
 
-$\ \ \ \ P$<br>
-$ = [C_2 \times (C_1^d)^{-1}] \mod p$<br>
-$ = [(P \times e_2^r) \times e_1^{-rd}] \mod p$<br>
-$ = [(P \times e_1^{rd}) \times e_1^{-rd}] \mod p$<br>
-$ = P$ 得证。
+<img src="http://latex.codecogs.com/gif.latex?\ \ \ \ P" /> <br>
+<img src="http://latex.codecogs.com/gif.latex? = [C_2 \times (C_1^d)^{-1}] \mod p" /> <br>
+<img src="http://latex.codecogs.com/gif.latex? = [(P \times e_2^r) \times e_1^{-rd}] \mod p" /> <br>
+<img src="http://latex.codecogs.com/gif.latex? = [(P \times e_1^{rd}) \times e_1^{-rd}] \mod p" /> <br>
+<img src="http://latex.codecogs.com/gif.latex? = P" />  得证。
 
 
 ### 安全性

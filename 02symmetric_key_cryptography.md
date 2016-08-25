@@ -77,14 +77,14 @@ RC4的核心是可变长度（但一般是256）的S盒，给定一个key，根�
      output K
 
 ```
-加/解密阶段，把输入作为源源不断的流来看，因此可以生成任意长度的子密钥。采用while循环，每输入一个字符就进行一次加/解密操作。因为RC4采用的加密方式是**密文=密码$\oplus$原文**
+加/解密阶段，把输入作为源源不断的流来看，因此可以生成任意长度的子密钥。采用while循环，每输入一个字符就进行一次加/解密操作。因为RC4采用的加密方式是**密文=密码<img src="http://latex.codecogs.com/gif.latex?\oplus" /> 原文**
 ，所以按照异或的特性，解密时只要用密文异或密码就可以得到原文了，步骤是完全一样的。所以只要**发送方和接收方先协商好一个key**，就可以采用RC4源源不断地产生流密码（子密钥）了。
 
 画成流程图如下：
 
 ![1](https://raw.githubusercontent.com/familyld/Network_Security/master/graph/RC4_algorithm2.png)
 
-图中的数组K就是预先约定好的key，根据它生成一个与S等长的数组T，可以理解为在初始化阶段加入了：$T[i]=K[i\%keylen]$ <br>
+图中的数组K就是预先约定好的key，根据它生成一个与S等长的数组T，可以理解为在初始化阶段加入了：<img src="http://latex.codecogs.com/gif.latex?T[i]=K[i\%keylen]" />  <br>
 然后在打乱S的阶段就可以直接调用T这个数组了。
 
 #### 攻击RC4的手段
@@ -92,11 +92,11 @@ RC4的核心是可变长度（但一般是256）的S盒，给定一个key，根�
 1. 针对机密性，就是实验一的方法，如果流密码多次使用则会被攻破。
 
 2. 针对完整性，攻击者不需要知道密文对应的原文是什么，他在发送方和接收方中间，把密文异或一个别的字符串，这样接收方解密后就无法获取正确的原文了。
-    - 发送方加密原文： $ m \oplus k = c$
+    - 发送方加密原文： <img src="http://latex.codecogs.com/gif.latex? m \oplus k = c" />
 
-    - 攻击者截取并异或字串p：$ c \oplus p = m \oplus k \oplus p$
+    - 攻击者截取并异或字串p：<img src="http://latex.codecogs.com/gif.latex? c \oplus p = m \oplus k \oplus p" />
 
-    - 接收方解密得到错误的原文：$ m \oplus k \oplus p \oplus k = m \oplus p$
+    - 接收方解密得到错误的原文：<img src="http://latex.codecogs.com/gif.latex? m \oplus k \oplus p \oplus k = m \oplus p" />
 
 
 ## 块加密
@@ -133,19 +133,19 @@ Feistel Network是一个用于构建块加密密文的对称结构，结构图�
 
 其实结构图就像是搭积木一样，将每一轮联系起来，构建出整个加密和解密的结构。
 
-其中$K_1$，$K_2$，...，$K_n$是由子密钥生成算法对约定的Key进行扩展获得的。这些子密钥分别对应用于不同轮的轮函数F中，也就是说，轮数是多少，就有多少个子密钥。
+其中<img src="http://latex.codecogs.com/gif.latex?K_1" /> ，<img src="http://latex.codecogs.com/gif.latex?K_2" /> ，...，<img src="http://latex.codecogs.com/gif.latex?K_n" /> 是由子密钥生成算法对约定的Key进行扩展获得的。这些子密钥分别对应用于不同轮的轮函数F中，也就是说，轮数是多少，就有多少个子密钥。
 
 将原文分块以后，每次给一个原文块进行多轮的加密操作。首先这个原文块被分作L和R两个等长的部分。然后每一轮中经过轮函数获得新一轮的L和R：
 
-$$L_{i+1} = R_i$$
-$$R_{i+1} = L_i \oplus F(R_i, K_i)$$
+<img src="http://latex.codecogs.com/gif.latex?L_{i+1} = R_i" />
+<img src="http://latex.codecogs.com/gif.latex?R_{i+1} = L_i \oplus F(R_i, K_i)" />
 
 **最后一轮加密**得到的L和R**对换后**就得到对应的密文块了。
 
 对应地解密时：
 
-$$R_i = L_{i+1}$$
-$$L_i = R_{i+1} \oplus F(R_i, K_i)$$
+<img src="http://latex.codecogs.com/gif.latex?R_i = L_{i+1}" />
+<img src="http://latex.codecogs.com/gif.latex?L_i = R_{i+1} \oplus F(R_i, K_i)" />
 
 结构图中右边部分其实是左边部分的镜面，RD对应LE，LD对应RE，这个注意不要弄混淆了。也因为这样，**最后一轮解密**后，还得把所得的LD和RD**对换**才能得到正确的原文块。
 
@@ -195,7 +195,7 @@ A：
 
 AES算法的**块大小为128bit**，**密钥长度**可选128，192，或256bit。**轮数视密钥长度而定**，可以为10，12，或14。
 
-AES加密过程是在一个4×4的**字节矩阵** ($4*4*8=128bit$) 上运作的，这个矩阵又称为**体（state）**，其初值就是一个明文区块（矩阵中一个元素大小就是明文区块中的一个Byte）。
+AES加密过程是在一个4×4的**字节矩阵** (<img src="http://latex.codecogs.com/gif.latex?4*4*8=128bit" /> ) 上运作的，这个矩阵又称为**体（state）**，其初值就是一个明文区块（矩阵中一个元素大小就是明文区块中的一个Byte）。
 
 #### 五个基本操作
 
@@ -257,13 +257,13 @@ ECB是最简单的加密模式，直接把消息按块大小分成若干块，�
 
 在CBC模式中，每个平文块**先与前一个密文块进行异或，然后再进行加密**。在这种方法中，每个密文块都依赖于它前面的所有平文块。同时，**为了保证每条消息的唯一性，第一个块要先跟初始化向量IV异或再加密**。每条消息发送后IV自增1，这样就能使重放攻击无效了。
 
-若第一个块下标为1，$C_{0}=IV$，则CBC模式的加密过程为:
+若第一个块下标为1，<img src="http://latex.codecogs.com/gif.latex?C_{0}=IV" /> ，则CBC模式的加密过程为:
 
-$$ C_{i}=E_{K}(P_{i} \oplus C_{i-1})$$
+<img src="http://latex.codecogs.com/gif.latex? C_{i}=E_{K}(P_{i} \oplus C_{i-1})" />
 
 而其解密过程则为:
 
-$$ P_{i}=D_{K}(C_i) \oplus C_{i-1}$$
+<img src="http://latex.codecogs.com/gif.latex? P_{i}=D_{K}(C_i) \oplus C_{i-1}" />
 
 缺点：
 
@@ -278,13 +278,13 @@ $$ P_{i}=D_{K}(C_i) \oplus C_{i-1}$$
 
 ![](https://upload.wikimedia.org/wikipedia/commons/7/75/Cfb_decryption.png)
 
-若第一个块下标为1，$C_{0}=IV$，则CFB模式的加密过程为:
+若第一个块下标为1，<img src="http://latex.codecogs.com/gif.latex?C_{0}=IV" /> ，则CFB模式的加密过程为:
 
-$$ C_{i}=E_{K}(C_{i-1}) \oplus P_i$$
+<img src="http://latex.codecogs.com/gif.latex? C_{i}=E_{K}(C_{i-1}) \oplus P_i" />
 
 而其解密过程则为:
 
-$$ P_{i}=E_{K}(C_{i-1}) \oplus C_{i}$$
+<img src="http://latex.codecogs.com/gif.latex? P_{i}=E_{K}(C_{i-1}) \oplus C_{i}" />
 
 **一定要注意！**这里**无论是加密还是解密对Key执行的操作都是加密操作**！ 因为密文对应的原文并没有加密，而是与前一段密文的加密结果进行了异或！所以解出对应原文时，按照异或特性，把密文再与前一段密文的加密结果进行异或就可以了。
 
@@ -298,10 +298,10 @@ $$ P_{i}=E_{K}(C_{i-1}) \oplus C_{i}$$
 
 OFB和CFB的区别就是它不是对前一块的密文进行加密，而是对前一块加密算法所得的块进行加密。由于异或操作的对称性，**OFB的加密和解密操作完全相同**！
 
-$$ C_{i}=P_{i}\oplus O_{i} $$
-$$ P_{i}=C_{i}\oplus O_{i} $$
-$$ O_{i}=\ E_{K}(O_{i-1}) $$
-$$ O_{0}=\ {\mbox{IV}} $$
+<img src="http://latex.codecogs.com/gif.latex? C_{i}=P_{i}\oplus O_{i} " />
+<img src="http://latex.codecogs.com/gif.latex? P_{i}=C_{i}\oplus O_{i} " />
+<img src="http://latex.codecogs.com/gif.latex? O_{i}=\ E_{K}(O_{i-1}) " />
+<img src="http://latex.codecogs.com/gif.latex? O_{0}=\ {\mbox{IV}} " />
 
 类似CFB，这里**无论是加密还是解密对Key执行的操作都是加密操作**！
 
@@ -407,7 +407,7 @@ KDC是用于进行秘钥分发的可信的第三方机构。
 
 - KDC收到请求后会产生票据(ticket)，票据里面包含会话双方的信息和分发的秘钥
     - 票据通过B的私钥进行加密，也就是A是不能解出里面的东西的…
-    - 然后票据在加密后再加上**会话秘钥**$K_{AB}$，再用A的私钥进行加密后发送给A
+    - 然后票据在加密后再加上**会话秘钥**<img src="http://latex.codecogs.com/gif.latex?K_{AB}" /> ，再用A的私钥进行加密后发送给A
     - A收到以后进行解密就得到了会话秘钥
     - 在这一步KDC完成了对A的验证（因为只有A才能解开上面的信息）
 
@@ -441,25 +441,25 @@ KDC是用于进行秘钥分发的可信的第三方机构。
 第一步：A向B提出会话请求
 
 - A告知B要对B进行会话
-- B在此时可以决定是否和A进行对话，是则然后将自己的时间戳$R_B$用自己的私钥加密后交给A
+- B在此时可以决定是否和A进行对话，是则然后将自己的时间戳<img src="http://latex.codecogs.com/gif.latex?R_B" /> 用自己的私钥加密后交给A
 
 第二步：A向KDC申请会话秘钥
 
-- A将自己的时间戳$R_A$连同会话双方的信息发送给KDC。KDC照旧对票据做两层加密后给到A。
+- A将自己的时间戳<img src="http://latex.codecogs.com/gif.latex?R_A" /> 连同会话双方的信息发送给KDC。KDC照旧对票据做两层加密后给到A。
 - A再进行第一层解密得到会话秘钥，同时得到自己的时间戳。比对时间戳后即可得知时间信息（避免黑客进行重放攻击而造成影响）
 
 第三步：A向B发送票据与验证信息
 
 - 票据中有会话秘钥
 - 验证信息包括
-    - B一开始给A发送的时间戳$R_B$（以应对重放攻击）
-    - A用新的会话秘钥加密一个新的时间戳$R_1$
+    - B一开始给A发送的时间戳<img src="http://latex.codecogs.com/gif.latex?R_B" /> （以应对重放攻击）
+    - A用新的会话秘钥加密一个新的时间戳<img src="http://latex.codecogs.com/gif.latex?R_1" />
 
 第四步：最终验证
 
 - 类似于TCP
 - 连续握手，确保对方收到的是共同的会话秘钥
-- B发回用新会话密钥加密的包，包含A发来的时间戳-1以及新的时间戳$R_2$
+- B发回用新会话密钥加密的包，包含A发来的时间戳-1以及新的时间戳<img src="http://latex.codecogs.com/gif.latex?R_2" />
 - A再发送一个用新会话密钥加密的包，包含B发来的时间戳-1，此时确认握手成功，正式建立会话。
 
 ### 秘钥管理（Key Agreement）
@@ -467,23 +467,23 @@ KDC是用于进行秘钥分发的可信的第三方机构。
 - 由于不经过第三方，所以A直接和B进行交互。在这种情况下A要么通过物理方式密送给B，要么就要进行特殊加密
 
 - 一种方法就是利用本原根（Primitive root）
-    - 对于一个质数p来说，当一个整数$\alpha$称为p的本原根时，其通过下式生成的a**各不相同**
+    - 对于一个质数p来说，当一个整数<img src="http://latex.codecogs.com/gif.latex?\alpha" /> 称为p的本原根时，其通过下式生成的a**各不相同**
 
-    $$a = \alpha^i mod \ p, \ where \ 0 \leq i \leq p-2$$
+    <img src="http://latex.codecogs.com/gif.latex?a = \alpha^i mod \ p, \ where \ 0 \leq i \leq p-2" />
 
-**注意区分$a$和阿尔法$\alpha$**，前者是模运算的结果，后者是质数p的本原根。
+**注意区分<img src="http://latex.codecogs.com/gif.latex?a" /> 和阿尔法<img src="http://latex.codecogs.com/gif.latex?\alpha" /> **，前者是模运算的结果，后者是质数p的本原根。
 
 比方说2就是11的本原根：
 
 ![10](https://raw.githubusercontent.com/familyld/Network_Security/master/graph/primitive_root.png)
 
-可以看到$2^0$到$2^{11-2}$模11所得的结果皆不相同。
+可以看到<img src="http://latex.codecogs.com/gif.latex?2^0" /> 到<img src="http://latex.codecogs.com/gif.latex?2^{11-2}" /> 模11所得的结果皆不相同。
 
 > **性质: 每个质数都存在本原根**
 
 #### 利用本原根进行加密
 
- 本原根的好处就在于，即使给出a，$\alpha$和p，**要求出i依然很难**。
+ 本原根的好处就在于，即使给出a，<img src="http://latex.codecogs.com/gif.latex?\alpha" /> 和p，**要求出i依然很难**。
 
 由此引申出了Diffle-Hellman加密方法：
 
@@ -491,11 +491,11 @@ KDC是用于进行秘钥分发的可信的第三方机构。
 
 它计算Key的方式很巧妙，这样算出来的两个key是相等的。
 
-$$k = (Y_B)^{X_A} \ mod \ p =  (\alpha ^{X_B} \ mod \ p)^{X_A} \ mod \ p$$
+<img src="http://latex.codecogs.com/gif.latex?k = (Y_B)^{X_A} \ mod \ p =  (\alpha ^{X_B} \ mod \ p)^{X_A} \ mod \ p" />
 
-$$k = (Y_A)^{X_B} \ mod \ p =  (\alpha ^{X_A} \ mod \ p)^{X_B} \ mod \ p$$
+<img src="http://latex.codecogs.com/gif.latex?k = (Y_A)^{X_B} \ mod \ p =  (\alpha ^{X_A} \ mod \ p)^{X_B} \ mod \ p" />
 
-即使攻击者知道了$Y_A$，$Y_B$，$\alpha$，和 $p$，依然无法猜出$X_A$和$X_B$，因此无法破解出密钥。
+即使攻击者知道了<img src="http://latex.codecogs.com/gif.latex?Y_A" /> ，<img src="http://latex.codecogs.com/gif.latex?Y_B" /> ，<img src="http://latex.codecogs.com/gif.latex?\alpha" /> ，和 <img src="http://latex.codecogs.com/gif.latex?p" /> ，依然无法猜出<img src="http://latex.codecogs.com/gif.latex?X_A" /> 和<img src="http://latex.codecogs.com/gif.latex?X_B" /> ，因此无法破解出密钥。
 
 但是Diffle-Hellman也不是没有问题，最大的问题在于**不能确定对方的身份**。
 
